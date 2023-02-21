@@ -1,0 +1,26 @@
+.edit-form {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+
+  /* top: 10%;
+  left: 40%; */
+}
+
+/* .edit-form::before {
+  width: 300vw;
+  height: 300vh;
+  content: '';
+  background-color: #000000;
+  opacity: 50%;
+
+  position: absolute;
+  top: -200%;
+  left: -200%;
+} */

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <script src="./skripts/script.js" defer></script>
+    <title>mesto</title>
+  </head>
+  <body class="page">
+    <header class="header">
+      <img class="header__logo" src="./images/Logo_header.svg" alt="Логотип карта России" />
+    </header>
+    <main class="main">
+      <section class="profile">
+        <div class="profile__frame">
+          <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар" />
+        </div>
+        <div class="profile__info">
+          <div class="profile__block">
+            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <button class="profile__edit-button">
+              <img
+                class="profile__edit-button-image"
+                src="./images/edit_button.svg"
+                alt="редактировать профиль"
+              />
+            </button>
+          </div>
+
+          <h2 class="profile__subtitle">Исследователь океана</h2>
+        </div>
+        <button class="add-button">
+          <img
+            class="profile__add-button-image"
+            src="./images/plus_add-button.svg"
+            alt="добавить фото"
+          />
+        </button>
+      </section>
+      <section class="elements">
+        <ul class="photo-grid">
+          <li class="photo-grid__item">
+            <img class="photo-grid__image" src="./images/karachaevsk.jpg" alt="Карачаевск" />
+            <div class="photo-grid__inscription">
+              <h3 class="photo-grid__title">Карачаевск</h3>
+              <button class="like-button">
+                <img class="like-button__image" src="./images/like.svg" alt="лайкнуть фото" />
+              </button>
+            </div>
+          </li>
+          <li class="photo-grid__item">
+            <img class="photo-grid__image" src="./images/karachaevsk.jpg" alt="Карачаевск" />
+            <div class="photo-grid__inscription">
+              <h3 class="photo-grid__title">Карачаевск</h3>
+              <button class="like-button">
+                <img class="like-button__image" src="./images/like.svg" alt="лайкнуть фото" />
+              </button>
+            </div>
+          </li>
+          <li class="photo-grid__item">
+            <img class="photo-grid__image" src="./images/karachaevsk.jpg" alt="Карачаевск" />
+            <div class="photo-grid__inscription">
+              <h3 class="photo-grid__title">Карачаевск</h3>
+              <button class="like-button">
+                <img class="like-button__image" src="./images/like.svg" alt="лайкнуть фото" />
+              </button>
+            </div>
+          </li>
+          <li class="photo-grid__item">
+            <img class="photo-grid__image" src="./images/karachaevsk.jpg" alt="Карачаевск" />
+            <div class="photo-grid__inscription">
+              <h3 class="photo-grid__title">Карачаевск</h3>
+              <button class="like-button">
+                <img class="like-button__image" src="./images/like.svg" alt="лайкнуть фото" />
+              </button>
+            </div>
+          </li>
+          <li class="photo-grid__item">
+            <img class="photo-grid__image" src="./images/karachaevsk.jpg" alt="Карачаевск" />
+            <div class="photo-grid__inscription">
+              <h3 class="photo-grid__title">Карачаевск</h3>
+              <button class="like-button">
+                <img class="like-button__image" src="./images/like.svg" alt="лайкнуть фото" />
+              </button>
+            </div>
+          </li>
+          <li class="photo-grid__item">
+            <img class="photo-grid__image" src="./images/karachaevsk.jpg" alt="Карачаевск" />
+            <div class="photo-grid__inscription">
+              <h3 class="photo-grid__title">Карачаевск</h3>
+              <button class="like-button">
+                <img class="like-button__image" src="./images/like.svg" alt="лайкнуть фото" />
+              </button>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <div class="edit-form edit-form_display_hidden">
+        <div class="edit-form__block">
+          <button class="edit-form__close-button">
+            <img
+              class="edit-form__close-button__image"
+              src="./images/Close_button.svg"
+              alt="закрыть окно редактированя профиля"
+            />
+          </button>
+
+          <h2 class="edit-form__title">Редактировать профиль</h2>
+          <label for="heading" class="edit-form__input"
+            ><input
+              class="edit-form__text edit-form__text_type_heading"
+              type="text"
+              name="heading"
+              id="heading"
+              placeholder="Жак-Ив Кусто"
+              required
+          /></label>
+
+          <label for="description" class="edit-form__input"
+            ><input
+              class="edit-form__text edit-form__text_type_description"
+              type="text"
+              name="description"
+              id="description"
+              placeholder="Исследователь океана"
+              required
+          /></label>
+
+          <button class="edit-form__save-button">Сохранить</button>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p class="footer__copyright">&copy;2023&#160;Mesto Russia</p>
+    </footer>
+  </body>
+</html>
