@@ -1,8 +1,8 @@
 .profile {
   display: grid;
-  padding: 50px 200px 0;
+  padding: 40px 200px 0;
   align-items: flex-start;
-  grid-template-columns: min-content min-content 1fr;
+  grid-template-columns: min-content max-content 1fr;
   grid-template-rows: min-content;
 }
 

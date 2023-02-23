@@ -50,9 +50,19 @@
             </div>
           </li>
           <li class="photo-grid__item">
-            <img class="photo-grid__image" src="./images/karachaevsk.jpg" alt="Карачаевск" />
+            <img class="photo-grid__image" src="./images/elbrus.jpg" alt="Эльбрус"" />
             <div class="photo-grid__inscription">
-              <h3 class="photo-grid__title">Карачаевск</h3>
+              <h3 class="photo-grid__title">Эльбрус</h3>
+              <button class="like-button">
+                <img class="like-button__image" src="./images/like.svg" alt="лайкнуть фото" />
+              </button>
+            </div>
+          </li>
+
+          <li class="photo-grid__item">
+            <img class="photo-grid__image" src="./images/dombai.jpg" alt="Домбай" />
+            <div class="photo-grid__inscription">
+              <h3 class="photo-grid__title">Домбай</h3>
               <button class="like-button">
                 <img class="like-button__image" src="./images/like.svg" alt="лайкнуть фото" />
               </button>
@@ -61,34 +71,26 @@
           <li class="photo-grid__item">
             <img class="photo-grid__image" src="./images/karachaevsk.jpg" alt="Карачаевск" />
             <div class="photo-grid__inscription">
-              <h3 class="photo-grid__title">Карачаевск</h3>
+              <h3 class="photo-grid__title">Карачаево-Черкессия</h3>
               <button class="like-button">
                 <img class="like-button__image" src="./images/like.svg" alt="лайкнуть фото" />
               </button>
             </div>
           </li>
           <li class="photo-grid__item">
-            <img class="photo-grid__image" src="./images/karachaevsk.jpg" alt="Карачаевск" />
+            <img class="photo-grid__image" src="./images/elbrus.jpg" alt="Эльбрус"" />
             <div class="photo-grid__inscription">
-              <h3 class="photo-grid__title">Карачаевск</h3>
+              <h3 class="photo-grid__title">Эльбрус</h3>
               <button class="like-button">
                 <img class="like-button__image" src="./images/like.svg" alt="лайкнуть фото" />
               </button>
             </div>
           </li>
+
           <li class="photo-grid__item">
-            <img class="photo-grid__image" src="./images/karachaevsk.jpg" alt="Карачаевск" />
+            <img class="photo-grid__image" src="./images/dombai.jpg" alt="Домбай" />
             <div class="photo-grid__inscription">
-              <h3 class="photo-grid__title">Карачаевск</h3>
-              <button class="like-button">
-                <img class="like-button__image" src="./images/like.svg" alt="лайкнуть фото" />
-              </button>
-            </div>
-          </li>
-          <li class="photo-grid__item">
-            <img class="photo-grid__image" src="./images/karachaevsk.jpg" alt="Карачаевск" />
-            <div class="photo-grid__inscription">
-              <h3 class="photo-grid__title">Карачаевск</h3>
+              <h3 class="photo-grid__title">Домбай</h3>
               <button class="like-button">
                 <img class="like-button__image" src="./images/like.svg" alt="лайкнуть фото" />
               </button>
@@ -96,39 +98,40 @@
           </li>
         </ul>
       </section>
-      <div class="edit-form edit-form_display_hidden">
-        <div class="edit-form__block">
-          <button class="edit-form__close-button">
+      <div class="popup">
+        <form class="popup__container">
+          <button class="popup__close-button">
             <img
-              class="edit-form__close-button__image"
+              class="popup__close-button-image"
               src="./images/Close_button.svg"
               alt="закрыть окно редактированя профиля"
             />
           </button>
 
-          <h2 class="edit-form__title">Редактировать профиль</h2>
-          <label for="heading" class="edit-form__input"
+          <h2 class="popup__title">Редактировать профиль</h2>
+
+          <label for="heading" class="popup__input"
             ><input
-              class="edit-form__text edit-form__text_type_heading"
+              class="popup__text popup__text_type_name"
               type="text"
               name="heading"
               id="heading"
-              placeholder="Жак-Ив Кусто"
+              placeholder="Имя"
               required
           /></label>
 
-          <label for="description" class="edit-form__input"
+          <label for="job" class="popup__input"
             ><input
-              class="edit-form__text edit-form__text_type_description"
+              class="popup__text popup__text_type_job"
               type="text"
-              name="description"
-              id="description"
-              placeholder="Исследователь океана"
+              name="job"
+              id="job"
+              placeholder="О себе"
               required
           /></label>
 
-          <button class="edit-form__save-button">Сохранить</button>
-        </div>
+          <button class="popup__save-button" type="submit">Сохранить</button>
+        </form>
       </div>
     </main>
 
