@@ -16,4 +16,4 @@
 - прописать загрузку новых картинок
 - подсчет лайков
 
-Ссылка на сайт: https://romanovdimitrii.github.io/russian-travel/
+Ссылка на сайт: https://romanovdimitrii.github.io/mesto/

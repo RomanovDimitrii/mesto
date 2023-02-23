@@ -19,7 +19,7 @@ function showPopup() {
 }
 
 function fillLikeButton() {
-  likeButtonImage.setAttribute('src', '../images/like_covered.svg');
+  likeButtonImage.setAttribute('src', './images/like_covered.svg');
 }
 
 function closePopup() {
