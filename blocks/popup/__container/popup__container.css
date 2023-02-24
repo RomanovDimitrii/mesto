@@ -8,7 +8,6 @@
   padding: 35px 36px;
   position: relative;
   overflow: inherit;
-  transform: translate(-10px, -80px);
   box-sizing: border-box;
 }
 
@@ -17,6 +16,5 @@
     min-width: calc(100vw - 80px);
     min-height: 322px;
     padding: 29px 22px 0;
-    transform: translate(0px, -90px);
   }
 }
