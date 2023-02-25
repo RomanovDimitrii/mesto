@@ -1,6 +1,5 @@
 .profile__edit-button-image {
-  width: 100%;
-
+  width: 42%;
   flex-shrink: 0;
   object-fit: cover;
   padding: 0;
