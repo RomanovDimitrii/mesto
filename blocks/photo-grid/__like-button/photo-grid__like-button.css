@@ -1,4 +1,4 @@
-.like-button {
+.photo-grid__like-button {
   margin-right: 20px;
   width: 22px;
   height: 19px;
@@ -8,7 +8,7 @@
   flex-shrink: 0;
 }
 
-.like-button:hover {
+.photo-grid__like-button:hover {
   cursor: pointer;
   opacity: 0.5;
 }

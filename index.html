@@ -13,30 +13,20 @@
     </header>
     <main class="main">
       <section class="profile">
-        <div class="profile__frame">
-          <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар" />
-        </div>
+        <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар" />
         <div class="profile__info">
           <div class="profile__block">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <button class="profile__edit-button">
-              <img
-                class="profile__edit-button-image"
-                src="./images/edit_button.svg"
-                alt="редактировать профиль"
-              />
-            </button>
+            <button
+              class="profile__edit-button"
+              type="button"
+              aria-label="Редактировать профиль"
+            ></button>
           </div>
 
-          <h2 class="profile__subtitle">Исследователь океана</h2>
+          <p class="profile__subtitle">Исследователь океана</p>
         </div>
-        <button class="add-button">
-          <img
-            class="profile__add-button-image"
-            src="./images/plus_add-button.svg"
-            alt="добавить фото"
-          />
-        </button>
+        <button class="profile__add-button" type="button" aria-label="Добавить фото"></button>
       </section>
       <section class="elements">
         <ul class="photo-grid">
@@ -44,17 +34,25 @@
             <img class="photo-grid__image" src="./images/karachaevsk.jpg" alt="Карачаевск" />
             <div class="photo-grid__inscription">
               <h3 class="photo-grid__title">Карачаевск</h3>
-              <button class="like-button">
-                <img class="like-button__image" src="./images/like.svg" alt="лайкнуть фото" />
+              <button class="photo-grid__like-button" type="button">
+                <img
+                  class="photo-grid__like-button-image"
+                  src="./images/like.svg"
+                  alt="лайкнуть фото"
+                />
               </button>
             </div>
           </li>
           <li class="photo-grid__item">
-            <img class="photo-grid__image" src="./images/elbrus.jpg" alt="Эльбрус"" />
+            <img class="photo-grid__image" src="./images/elbrus.jpg" alt="Эльбрус" />
             <div class="photo-grid__inscription">
               <h3 class="photo-grid__title">Гора Эльбрус</h3>
-              <button class="like-button">
-                <img class="like-button__image" src="./images/like.svg" alt="лайкнуть фото" />
+              <button class="photo-grid__like-button" type="button">
+                <img
+                  class="photo-grid__like-button-image"
+                  src="./images/like.svg"
+                  alt="лайкнуть фото"
+                />
               </button>
             </div>
           </li>
@@ -63,8 +61,12 @@
             <img class="photo-grid__image" src="./images/dombai.jpg" alt="Домбай" />
             <div class="photo-grid__inscription">
               <h3 class="photo-grid__title">Домбай</h3>
-              <button class="like-button">
-                <img class="like-button__image" src="./images/like.svg" alt="лайкнуть фото" />
+              <button class="photo-grid__like-button" type="button">
+                <img
+                  class="photo-grid__like-button-image"
+                  src="./images/like.svg"
+                  alt="лайкнуть фото"
+                />
               </button>
             </div>
           </li>
@@ -72,17 +74,25 @@
             <img class="photo-grid__image" src="./images/karachaevsk.jpg" alt="Карачаевск" />
             <div class="photo-grid__inscription">
               <h3 class="photo-grid__title">Карачаево-Черкессия</h3>
-              <button class="like-button">
-                <img class="like-button__image" src="./images/like.svg" alt="лайкнуть фото" />
+              <button class="photo-grid__like-button" type="button">
+                <img
+                  class="photo-grid__like-button-image"
+                  src="./images/like.svg"
+                  alt="лайкнуть фото"
+                />
               </button>
             </div>
           </li>
           <li class="photo-grid__item">
-            <img class="photo-grid__image" src="./images/elbrus.jpg" alt="Эльбрус"" />
+            <img class="photo-grid__image" src="./images/elbrus.jpg" alt="Эльбрус" />
             <div class="photo-grid__inscription">
               <h3 class="photo-grid__title">Эльбрус</h3>
-              <button class="like-button">
-                <img class="like-button__image" src="./images/like.svg" alt="лайкнуть фото" />
+              <button class="photo-grid__like-button" type="button">
+                <img
+                  class="photo-grid__like-button-image"
+                  src="./images/like.svg"
+                  alt="лайкнуть фото"
+                />
               </button>
             </div>
           </li>
@@ -91,25 +101,34 @@
             <img class="photo-grid__image" src="./images/dombai.jpg" alt="Домбай" />
             <div class="photo-grid__inscription">
               <h3 class="photo-grid__title">Домбай</h3>
-              <button class="like-button">
-                <img class="like-button__image" src="./images/like.svg" alt="лайкнуть фото" />
+              <button class="photo-grid__like-button" type="button">
+                <img
+                  class="photo-grid__like-button-image"
+                  src="./images/like.svg"
+                  alt="лайкнуть фото"
+                />
               </button>
             </div>
           </li>
         </ul>
       </section>
-      <div class="popup">
-        <form class="popup__container">
-          <button class="popup__close-button">
-            <img
-              class="popup__close-button-image"
-              src="./images/Close_button.svg"
-              alt="закрыть окно редактированя профиля"
-            />
-          </button>
+    </main>
 
-          <h2 class="popup__title">Редактировать профиль</h2>
+    <footer class="footer">
+      <p class="footer__copyright">&copy;2023&#160;Mesto Russia</p>
+    </footer>
+    <div class="popup">
+      <div class="popup__container">
+        <button class="popup__close-button" type="button">
+          <img
+            class="popup__close-button-image"
+            src="./images/Close_button.svg"
+            alt="закрыть окно редактированя профиля"
+          />
+        </button>
 
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="popup__form" name="form_name">
           <label for="heading" class="popup__input"
             ><input
               class="popup__text popup__text_type_name"
@@ -133,10 +152,6 @@
           <button class="popup__save-button" type="submit">Сохранить</button>
         </form>
       </div>
-    </main>
-
-    <footer class="footer">
-      <p class="footer__copyright">&copy;2023&#160;Mesto Russia</p>
-    </footer>
+    </div>
   </body>
 </html>
