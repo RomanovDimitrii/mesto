@@ -1,5 +1,4 @@
-.photo-grid__image {
+.photo-grid__delete-button-image {
   width: 100%;
-  height: 282px;
   object-fit: cover;
 }

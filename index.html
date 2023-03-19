@@ -17,7 +17,11 @@
         <div class="profile__info">
           <div class="profile__block">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <button class="profile__edit-button" type="button" aria-label="Редактировать профиль"></button>
+            <button
+              class="profile__edit-button"
+              type="button"
+              aria-label="Редактировать профиль"
+            ></button>
           </div>
           <p class="profile__subtitle">Исследователь океана</p>
         </div>
@@ -25,85 +29,28 @@
       </section>
       <section class="elements">
         <ul class="photo-grid">
-          <li class="photo-grid__item">
-            <img class="photo-grid__image" src="./images/karachaevsk.jpg" alt="Карачаевск" />
-            <div class="photo-grid__inscription">
-              <h3 class="photo-grid__title">Карачаевск</h3>
-              <button class="photo-grid__like-button" type="button">
+          <template id="photoTemplate">
+            <li class="photo-grid__item">
+              <img class="photo-grid__image" alt="" />
+              <div class="photo-grid__inscription">
+                <h3 class="photo-grid__title"></h3>
+                <button class="photo-grid__like-button" type="button">
+                  <img
+                    class="photo-grid__like-button-image"
+                    src="./images/like.svg"
+                    alt="лайкнуть фото"
+                  />
+                </button>
+              </div>
+              <button class="photo-grid__delete-button" type="button">
                 <img
-                  class="photo-grid__like-button-image"
-                  src="./images/like.svg"
-                  alt="лайкнуть фото"
+                  class="photo-grid__delete-button-image"
+                  src="./images/DeleteButton.svg"
+                  alt="удалить фото"
                 />
               </button>
-            </div>
-          </li>
-          <li class="photo-grid__item">
-            <img class="photo-grid__image" src="./images/elbrus.jpg" alt="Эльбрус" />
-            <div class="photo-grid__inscription">
-              <h3 class="photo-grid__title">Гора Эльбрус</h3>
-              <button class="photo-grid__like-button" type="button">
-                <img
-                  class="photo-grid__like-button-image"
-                  src="./images/like.svg"
-                  alt="лайкнуть фото"
-                />
-              </button>
-            </div>
-          </li>
-          <li class="photo-grid__item">
-            <img class="photo-grid__image" src="./images/dombai.jpg" alt="Домбай" />
-            <div class="photo-grid__inscription">
-              <h3 class="photo-grid__title">Домбай</h3>
-              <button class="photo-grid__like-button" type="button">
-                <img
-                  class="photo-grid__like-button-image"
-                  src="./images/like.svg"
-                  alt="лайкнуть фото"
-                />
-              </button>
-            </div>
-          </li>
-          <li class="photo-grid__item">
-            <img class="photo-grid__image" src="./images/karachaevsk.jpg" alt="Карачаевск" />
-            <div class="photo-grid__inscription">
-              <h3 class="photo-grid__title">Карачаево-Черкессия</h3>
-              <button class="photo-grid__like-button" type="button">
-                <img
-                  class="photo-grid__like-button-image"
-                  src="./images/like.svg"
-                  alt="лайкнуть фото"
-                />
-              </button>
-            </div>
-          </li>
-          <li class="photo-grid__item">
-            <img class="photo-grid__image" src="./images/elbrus.jpg" alt="Эльбрус" />
-            <div class="photo-grid__inscription">
-              <h3 class="photo-grid__title">Эльбрус</h3>
-              <button class="photo-grid__like-button" type="button">
-                <img
-                  class="photo-grid__like-button-image"
-                  src="./images/like.svg"
-                  alt="лайкнуть фото"
-                />
-              </button>
-            </div>
-          </li>
-
-          <li class="photo-grid__item">
-            <img class="photo-grid__image" src="./images/dombai.jpg" alt="Домбай" />
-            <div class="photo-grid__inscription">
-              <h3 class="photo-grid__title">Домбай</h3>
-              <button class="photo-grid__like-button" type="button">
-                <img
-                  class="photo-grid__like-button-image"
-                  src="./images/like.svg"
-                  alt="лайкнуть фото"
-                />
-              </button>
-            </div>
-          </li>
+            </li>
+          </template>
         </ul>
       </section>
     </main>
@@ -111,7 +58,7 @@
     <footer class="footer">
       <p class="footer__copyright">&copy;2023&#160;Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <div class="popup popup_profile">
       <div class="popup__container">
         <button class="popup__close-button" type="button">
           <img
@@ -122,7 +69,7 @@
         </button>
 
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="form_name">
+        <form class="popup__form popup__form_profile" name="form_name">
           <label for="heading" class="popup__input"
             ><input
               class="popup__text popup__text_type_name"
@@ -145,6 +92,55 @@
 
           <button class="popup__save-button" type="submit">Сохранить</button>
         </form>
+      </div>
+    </div>
+    <div class="popup popup_place">
+      <div class="popup__container">
+        <button class="popup__close-button" type="button">
+          <img
+            class="popup__close-button-image"
+            src="./images/Close_button.svg"
+            alt="закрыть окно редактированя профиля"
+          />
+        </button>
+
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form popup__form_place" name="form_place">
+          <label for="place" class="popup__input"
+            ><input
+              class="popup__text popup__text_type_place"
+              type="text"
+              name="place"
+              id="place"
+              placeholder="Название"
+              required
+          /></label>
+
+          <label for="link" class="popup__input"
+            ><input
+              class="popup__text popup__text_type_link"
+              type="text"
+              name="link"
+              id="link"
+              placeholder="Ссылка на картинку"
+              required
+          /></label>
+
+          <button class="popup__save-button" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_image">
+      <div class="popup__image-container">
+        <button class="popup__close-button" type="button">
+          <img
+            class="popup__close-button-image"
+            src="./images/Close_button.svg"
+            alt="закрыть окно редактированя профиля"
+          />
+        </button>
+        <img class="popup__image" src="./images/Close_button.svg" alt="" />
+        <h2 class="popup__image-title"></h2>
       </div>
     </div>
   </body>
