@@ -1,75 +1,74 @@
-let page = document.querySelector('.page');
-let profileEditButton = page.querySelector('.profile__edit-button');
-let popupCloseButtons = page.querySelectorAll('.popup__close-button');
-let popupFormProfile = page.querySelector('.popup__form_profile');
-let popupFormPlace = page.querySelector('.popup__form_place');
-let popupProfile = page.querySelector('.popup_profile');
-let popupPlace = page.querySelector('.popup_place');
-let profileTitle = page.querySelector('.profile__title');
-let profileSubTitle = page.querySelector('.profile__subtitle');
-let nameInput = document.querySelector('.popup__text_type_name');
-let jobInput = document.querySelector('.popup__text_type_job');
-let placeInput = document.querySelector('.popup__text_type_place');
-let linkInput = document.querySelector('.popup__text_type_link');
-let photoGrid = document.querySelector('.photo-grid');
-let placeAddButton = document.querySelector('.profile__add-button');
-let popupImage = document.querySelector('.popup_image');
-let popupImageSrc = document.querySelector('.popup__image');
+const page = document.querySelector('.page');
+const profileEditButton = page.querySelector('.profile__edit-button');
+const popupCloseButtons = page.querySelectorAll('.popup__close-button');
+const popupOpenButtons = page.querySelectorAll('.popup__close-button');
+const popupFormProfile = document.forms['form_profile'];
+const popupFormPlace = document.forms['form_place'];
+const popupProfile = page.querySelector('.popup_profile');
+const popupPlace = page.querySelector('.popup_place');
+const profileTitle = page.querySelector('.profile__title');
+const profileSubTitle = page.querySelector('.profile__subtitle');
+const nameInput = document.querySelector('.popup__text_type_name');
+const jobInput = document.querySelector('.popup__text_type_job');
+const placeInput = document.querySelector('.popup__text_type_place');
+const linkInput = document.querySelector('.popup__text_type_link');
+const photoGrid = document.querySelector('.photo-grid');
+const placeAddButton = document.querySelector('.profile__add-button');
+const popupImage = document.querySelector('.popup_image');
+const popupImageSrc = document.querySelector('.popup__image');
+const cardTemplate = document.querySelector('#photoTemplate');
 
-let popupImageTitle = document.querySelector('.popup__image-title');
+const popupImageTitle = document.querySelector('.popup__image-title');
 
 const initialCards = [
   {
     name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-    alt: 'Архыз'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
   },
   {
     name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-    alt: 'Челябинская область'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
   },
   {
     name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-    alt: 'Иваново'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
   },
   {
     name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-    alt: 'Камчатка'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
   },
   {
     name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-    alt: 'Холмогорский район'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
   },
   {
     name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-    alt: 'Байкал'
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
 
 function showPopupProfile() {
   //функция добавляет класс попапу (popup_opened), передает данные в input из текущих значений profile__title и subtitle.
-  popupProfile.classList.add('popup_opened');
+
+  openPopup(popupProfile);
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubTitle.textContent;
 }
 
 function showPopupPlaceAdd() {
   //функция добавляет класс попапу (popup_opened), очищает поле ввода данных
-  popupPlace.classList.add('popup_opened');
-  placeInput.value = '';
-  linkInput.value = '';
+  openPopup(popupPlace);
+}
+
+function showPopupImage() {
+  //функция добавляет класс попапу (popup_opened)
+  openPopup(popupImage);
 }
 
 popupCloseButtons.forEach(button =>
   //функция опрашивает все closeButtons, произошел ли клик, если да, фиксирует какому попапу принадлежит кнопка, передает данные попапа в функцию закрытия
   button.addEventListener('click', () => {
     const popup = button.closest('.popup');
-    console.log(popup);
     closePopup(popup);
   })
 );
@@ -77,12 +76,15 @@ popupCloseButtons.forEach(button =>
 //функция по полученным данным попапа удаляет модификатор видимости попапа
 closePopup = popup => popup.classList.remove('popup_opened');
 
+//функция по полученным данным попапа добавляет модификатор видимости попапа
+openPopup = popup => popup.classList.add('popup_opened');
+
 function saveProfile(evt) {
   //при сабмите меняет textcontent в profile__title и subtitle
   evt.preventDefault();
   profileTitle.textContent = nameInput.value;
   profileSubTitle.textContent = jobInput.value;
-  popupProfile.classList.remove('popup_opened');
+  closePopup(popupProfile);
 }
 
 function savePlace(evt) {
@@ -93,38 +95,47 @@ function savePlace(evt) {
     link: linkInput.value,
     alt: placeInput.value
   };
-  popupPlace.classList.remove('popup_opened');
-  createCard(newCard);
+  closePopup(popupPlace);
+  createCard(newCard); //тут надо геткард
+  placeInput.value = '';
+  linkInput.value = '';
 }
 
 initialCards.forEach(createCard);
 
 function createCard(card) {
-  // берет темплейт из html, подставляем данные из функции savePlace. Также ведет опрос всех кнопок на карточках, фиксирует нажатие, передает данные карточки, на которую нажали
-  const newCard = document.querySelector('#photoTemplate').content.cloneNode(true);
-  const photoGridTitle = newCard.querySelector('.photo-grid__title');
-  photoGridTitle.textContent = card.name;
-  const photoGridImage = newCard.querySelector('.photo-grid__image');
-  photoGridImage.setAttribute('src', card.link);
-  photoGridImage.setAttribute('alt', initialCards.alt);
-  const likeButton = newCard.querySelector('.photo-grid__like-button');
-  likeButton.addEventListener('click', handleLikeButton);
-  const deleteButton = newCard.querySelector('.photo-grid__delete-button');
-  deleteButton.addEventListener('click', handleDeleteButton);
-  const popupImage = newCard.querySelector('.photo-grid__image');
-  popupImage.addEventListener('click', openPopupImage);
+  // В константу newCard заносит данные первичного массива, добавляются новые через savePlace, или удаляются .
+  const newCard = getCard(card);
+  setListeners(newCard);
   photoGrid.prepend(newCard);
+}
+
+function getCard(card) {
+  // берет темплейт из html, подставляем данные из функции savePlace, или  массива initialCards
+  const cardItem = cardTemplate.content.cloneNode(true);
+  const photoGridTitle = cardItem.querySelector('.photo-grid__title');
+  photoGridTitle.textContent = card.name;
+  const photoGridImage = cardItem.querySelector('.photo-grid__image');
+  photoGridImage.setAttribute('src', card.link);
+  photoGridImage.setAttribute('alt', card.name);
+  return cardItem;
+}
+
+function setListeners(cardItem) {
+  //Ведет опрос всех кнопок на карточках, фиксирует нажатие, передает данные карточки, на которую нажали
+  const likeButton = cardItem.querySelector('.photo-grid__like-button');
+  likeButton.addEventListener('click', handleLikeButton);
+  const deleteButton = cardItem.querySelector('.photo-grid__delete-button');
+  deleteButton.addEventListener('click', handleDeleteButton);
+  const popupImage = cardItem.querySelector('.photo-grid__image');
+  popupImage.addEventListener('click', openPopupImage);
 }
 
 function handleLikeButton(event) {
   //при нажатии на лайк (событие в createCard), меняет изображение лайка на закрашенное, или на незакрашенное
   const button = event.target;
   const like = button.closest('.photo-grid__like-button-image');
-  if (like.getAttribute('src') === './images/like_covered.svg') {
-    like.setAttribute('src', './images/like.svg');
-  } else {
-    like.setAttribute('src', './images/like_covered.svg');
-  }
+  like.classList.toggle('photo-grid__like-button-image_active');
 }
 
 function handleDeleteButton(event) {
@@ -142,11 +153,6 @@ function openPopupImage(event) {
   popupImageSrc.setAttribute('src', imageSrc);
   popupImageTitle.textContent = imageTitile;
   showPopupImage();
-}
-
-function showPopupImage() {
-  //функция добавляет класс попапу (popup_opened)
-  popupImage.classList.add('popup_opened');
 }
 
 profileEditButton.addEventListener('click', showPopupProfile);
