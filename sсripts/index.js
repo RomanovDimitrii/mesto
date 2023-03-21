@@ -1,7 +1,6 @@
 const page = document.querySelector('.page');
 const profileEditButton = page.querySelector('.profile__edit-button');
 const popupCloseButtons = page.querySelectorAll('.popup__close-button');
-const popupOpenButtons = page.querySelectorAll('.popup__close-button');
 const popupFormProfile = document.forms['form_profile'];
 const popupFormPlace = document.forms['form_place'];
 const popupProfile = page.querySelector('.popup_profile');
@@ -106,7 +105,7 @@ initialCards.forEach(createCard);
 function createCard(card) {
   // В константу newCard заносит данные первичного массива, добавляются новые через savePlace, или удаляются .
   const newCard = getCard(card);
-  setListeners(newCard);
+
   photoGrid.prepend(newCard);
 }
 
@@ -118,6 +117,7 @@ function getCard(card) {
   const photoGridImage = cardItem.querySelector('.photo-grid__image');
   photoGridImage.setAttribute('src', card.link);
   photoGridImage.setAttribute('alt', card.name);
+  setListeners(cardItem);
   return cardItem;
 }
 
@@ -150,7 +150,9 @@ function openPopupImage(event) {
   const card = event.target;
   const imageSrc = card.closest('.photo-grid__image').getAttribute('src');
   const imageTitile = card.closest('.photo-grid__item').textContent;
+  const imageAlt = card.closest('.photo-grid__image').getAttribute('alt');
   popupImageSrc.setAttribute('src', imageSrc);
+  popupImageSrc.setAttribute('alt', imageTitile);
   popupImageTitle.textContent = imageTitile;
   showPopupImage();
 }

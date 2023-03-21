@@ -1,4 +1,5 @@
 .popup {
+  opacity: 0;
   visibility: hidden;
   transition: visibility 0.2s, opacity 0.2s ease-in;
   width: 100vw;
