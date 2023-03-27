@@ -72,11 +72,33 @@ popupCloseButtons.forEach(button =>
   })
 );
 
+function handleMousecClose(event) {
+  if (event.target === event.currentTarget) {
+    console.log('popupBlock');
+    const popup = event.target.closest('.popup');
+    closePopup(popup);
+  }
+}
+
+function closePopupEscape(event) {
+  if (event.key === 'Escape') {
+    const popupEscape = document.querySelector('.popup_opened');
+    closePopup(popupEscape);
+  }
+}
+
 //функция по полученным данным попапа удаляет модификатор видимости попапа
-closePopup = popup => popup.classList.remove('popup_opened');
+closePopup = popup => {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEscape);
+};
 
 //функция по полученным данным попапа добавляет модификатор видимости попапа
-openPopup = popup => popup.classList.add('popup_opened');
+openPopup = popup => {
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupEscape);
+  popup.addEventListener('click', handleMousecClose);
+};
 
 function saveProfile(evt) {
   //при сабмите меняет textcontent в profile__title и subtitle
@@ -143,6 +165,14 @@ function handleDeleteButton(event) {
   const button = event.target;
   const card = button.closest('.photo-grid__item');
   card.remove();
+}
+
+function handleEscButton(event, popup) {
+  //при нажатии на удаление карточки (событие в createCard), удаляет карточку
+  if (event.keyCode === 'Escape') {
+    console.log('ESC');
+    closePopup(popup);
+  }
 }
 
 function openPopupImage(event) {
