@@ -16,35 +16,8 @@ const placeAddButton = document.querySelector('.profile__add-button');
 const popupImage = document.querySelector('.popup_image');
 const popupImageSrc = document.querySelector('.popup__image');
 const cardTemplate = document.querySelector('#photoTemplate');
-
 const popupImageTitle = document.querySelector('.popup__image-title');
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+const popupList = document.querySelectorAll('.popup');
 
 function showPopupProfile() {
   //функция добавляет класс попапу (popup_opened), передает данные в input из текущих значений profile__title и subtitle.
@@ -64,18 +37,16 @@ function showPopupImage() {
   openPopup(popupImage);
 }
 
-popupCloseButtons.forEach(button =>
-  //функция опрашивает все closeButtons, произошел ли клик, если да, фиксирует какому попапу принадлежит кнопка, передает данные попапа в функцию закрытия
+popupCloseButtons.forEach(button => {
+  const popup = button.closest('.popup');
   button.addEventListener('click', () => {
-    const popup = button.closest('.popup');
     closePopup(popup);
-  })
-);
+  });
+});
 
-function handleMousecClose(event) {
+function handleMouseClose(event) {
   if (event.target === event.currentTarget) {
-    console.log('popupBlock');
-    const popup = event.target.closest('.popup');
+    const popup = event.target;
     closePopup(popup);
   }
 }
@@ -97,7 +68,6 @@ closePopup = popup => {
 openPopup = popup => {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupEscape);
-  popup.addEventListener('click', handleMousecClose);
 };
 
 function saveProfile(evt) {
@@ -120,6 +90,8 @@ function savePlace(evt) {
   createCard(newCard); //тут надо геткард
   placeInput.value = '';
   linkInput.value = '';
+  evt.submitter.classList.add('popup__save-button_not-valid');
+  evt.submitter.disabled = true;
 }
 
 initialCards.forEach(createCard);
@@ -186,6 +158,9 @@ function openPopupImage(event) {
   popupImageTitle.textContent = imageTitile;
   showPopupImage();
 }
+popupList.forEach(popup => {
+  popup.addEventListener('click', handleMouseClose);
+});
 
 profileEditButton.addEventListener('click', showPopupProfile);
 popupFormProfile.addEventListener('submit', saveProfile);
