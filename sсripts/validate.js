@@ -81,7 +81,7 @@ const enableValidation = config => {
 enableValidation({
   formSelector: '.popup__form',
   inputSelector: '.popup__text',
-  errorClassTemplate: 'form__input-error_type_',
+  errorClassTemplate: 'popup__input-error_type_',
   activeErrorClass: 'popup__input-error',
   submitButtonSelector: '.popup__save-button',
   notValidSubmitButtonClass: 'popup__save-button_not-valid'
