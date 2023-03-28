@@ -2,18 +2,18 @@ const showInputError = (
   errorTextElement,
   validationMessage,
   activeErrorClass,
-  activeInputForm,
+  input,
   inputErrorClass
 ) => {
   errorTextElement.textContent = validationMessage;
   errorTextElement.classList.add(activeErrorClass);
-  activeInputForm.classList.add(inputErrorClass);
+  input.classList.add(inputErrorClass);
 };
 
-const hideInputError = (errorTextElement, activeErrorClass, activeInputForm, inputErrorClass) => {
+const hideInputError = (errorTextElement, activeErrorClass, input, inputErrorClass) => {
   errorTextElement.classList.remove(activeErrorClass);
   errorTextElement.textContent = '';
-  activeInputForm.classList.remove(inputErrorClass);
+  input.classList.remove(inputErrorClass);
 };
 
 const disableButton = (submitButton, notValidSubmitButtonClass) => {
@@ -30,20 +30,20 @@ const checkInputValidity = (
   input,
   errorClassTemplate,
   activeErrorClass,
-  activeInputselector,
+
   inputErrorClass
 ) => {
   const errorTextElement = document.querySelector(`.${errorClassTemplate}${input.name}`);
-  const activeInputForm = input.closest(activeInputselector);
+  // const activeInputForm = input.closest(inputSelector);
 
   if (input.validity.valid) {
-    hideInputError(errorTextElement, activeErrorClass, activeInputForm, inputErrorClass);
+    hideInputError(errorTextElement, activeErrorClass, input, inputErrorClass);
   } else {
     showInputError(
       errorTextElement,
       input.validationMessage,
       activeErrorClass,
-      activeInputForm,
+      input,
       inputErrorClass
     );
   }
@@ -68,7 +68,7 @@ const setEventListeners = (
   activeErrorClass,
   submitButtonSelector,
   notValidSubmitButtonClass,
-  activeInputselector,
+
   inputErrorClass
 ) => {
   formList.forEach(form => {
@@ -81,7 +81,7 @@ const setEventListeners = (
           input,
           errorClassTemplate,
           activeErrorClass,
-          activeInputselector,
+
           inputErrorClass
         );
         toggleButtonState(submitButton, notValidSubmitButtonClass, inputList);
@@ -100,18 +100,17 @@ const enableValidation = config => {
     config.activeErrorClass,
     config.submitButtonSelector,
     config.notValidSubmitButtonClass,
-    config.activeInputselector,
+
     config.inputErrorClass
   );
 };
 
 enableValidation({
   formSelector: '.popup__form',
-  inputSelector: '.popup__text',
+  inputSelector: '.popup__input',
   errorClassTemplate: 'popup__input-error_type_',
   activeErrorClass: 'popup__input-error',
   submitButtonSelector: '.popup__save-button',
   notValidSubmitButtonClass: 'popup__save-button_not-valid',
-  activeInputselector: '.popup__input',
   inputErrorClass: 'popup__input_error-border'
 });
