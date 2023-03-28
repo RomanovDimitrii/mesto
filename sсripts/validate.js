@@ -1,17 +1,15 @@
 const showInputError = (
   errorTextElement,
   validationMessage,
-  activeErrorClass,
+
   input,
   inputErrorClass
 ) => {
   errorTextElement.textContent = validationMessage;
-  errorTextElement.classList.add(activeErrorClass);
   input.classList.add(inputErrorClass);
 };
 
-const hideInputError = (errorTextElement, activeErrorClass, input, inputErrorClass) => {
-  errorTextElement.classList.remove(activeErrorClass);
+const hideInputError = (errorTextElement, input, inputErrorClass) => {
   errorTextElement.textContent = '';
   input.classList.remove(inputErrorClass);
 };
@@ -29,20 +27,18 @@ const enableButton = (submitButton, notValidSubmitButtonClass) => {
 const checkInputValidity = (
   input,
   errorClassTemplate,
-  activeErrorClass,
 
   inputErrorClass
 ) => {
   const errorTextElement = document.querySelector(`.${errorClassTemplate}${input.name}`);
-  // const activeInputForm = input.closest(inputSelector);
 
   if (input.validity.valid) {
-    hideInputError(errorTextElement, activeErrorClass, input, inputErrorClass);
+    hideInputError(errorTextElement, input, inputErrorClass);
   } else {
     showInputError(
       errorTextElement,
       input.validationMessage,
-      activeErrorClass,
+
       input,
       inputErrorClass
     );
@@ -65,7 +61,7 @@ const setEventListeners = (
   formList,
   inputSelector,
   errorClassTemplate,
-  activeErrorClass,
+
   submitButtonSelector,
   notValidSubmitButtonClass,
 
@@ -80,7 +76,6 @@ const setEventListeners = (
         checkInputValidity(
           input,
           errorClassTemplate,
-          activeErrorClass,
 
           inputErrorClass
         );
@@ -97,10 +92,8 @@ const enableValidation = config => {
     formList,
     config.inputSelector,
     config.errorClassTemplate,
-    config.activeErrorClass,
     config.submitButtonSelector,
     config.notValidSubmitButtonClass,
-
     config.inputErrorClass
   );
 };
@@ -109,7 +102,6 @@ enableValidation({
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   errorClassTemplate: 'popup__input-error_type_',
-  activeErrorClass: 'popup__input-error',
   submitButtonSelector: '.popup__save-button',
   notValidSubmitButtonClass: 'popup__save-button_not-valid',
   inputErrorClass: 'popup__input_error-border'
