@@ -1,7 +1,6 @@
 import { initialCards } from './cards.js';
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
-import { formData } from './formData.js';
 
 const page = document.querySelector('.page');
 const profileEditButton = page.querySelector('.profile__edit-button');
@@ -19,15 +18,20 @@ const linkInput = document.querySelector('.popup__input_type_link');
 const photoGrid = document.querySelector('.photo-grid');
 const placeAddButton = document.querySelector('.profile__add-button');
 const popupList = document.querySelectorAll('.popup');
+const popupImage = document.querySelector('.popup_image');
+const popupImageSrc = document.querySelector('.popup__image');
+const popupImageTitle = document.querySelector('.popup__image-title');
 
 function showPopupProfile() {
   openPopup(popupProfile);
   nameInput.value = profileTitle.textContent;
   jobInput.value = profileSubTitle.textContent;
+  formValidators['form_profile'].resetValidation();
 }
 
 function showPopupPlaceAdd() {
   openPopup(popupPlace);
+  formValidators['form_place'].resetValidation();
 }
 
 const openPopup = popup => {
@@ -43,8 +47,8 @@ popupCloseButtons.forEach(button => {
 });
 
 function handleMouseClose(event) {
-  if (event.target === event.currentTarget) {
-    const popup = event.target;
+  const popup = event.currentTarget;
+  if (event.target === popup) {
     closePopup(popup);
   }
 }
@@ -57,7 +61,6 @@ const closePopup = popup => {
 function closePopupEscape(event) {
   if (event.key === 'Escape') {
     const popupEscape = document.querySelector('.popup_opened');
-    console.log(popupEscape);
     closePopup(popupEscape);
   }
 }
@@ -69,13 +72,17 @@ function saveProfile(evt) {
   closePopup(popupProfile);
 }
 
-const createCard = newCard => {
-  const cardItem = newCard.generateCard();
+function getCard(card) {
+  const cardElement = new Card(card, '#photoTemplate', handleCardClick).generateCard();
+  return cardElement;
+}
+
+const createCard = card => {
+  const cardItem = getCard(card);
   photoGrid.prepend(cardItem);
 };
 
 function savePlace(evt) {
-  //при сабмите сохраняет данные, запускает функцию newCard
   evt.preventDefault();
   const card = {
     name: placeInput.value,
@@ -83,18 +90,20 @@ function savePlace(evt) {
     alt: placeInput.value
   };
   closePopup(popupPlace);
-  const newCard = new Card(card, '#photoTemplate');
-  createCard(newCard);
-  placeInput.value = '';
-  linkInput.value = '';
-  evt.submitter.classList.add('popup__save-button_not-valid');
-  evt.submitter.disabled = true;
+  createCard(card);
+  evt.target.reset(); // очистка формы
 }
 
 initialCards.forEach(item => {
-  const newCard = new Card(item, '#photoTemplate');
-  createCard(newCard);
+  createCard(item);
 });
+
+function handleCardClick(name, link) {
+  popupImageSrc.setAttribute('src', link);
+  popupImageSrc.setAttribute('alt', name);
+  popupImageTitle.textContent = name;
+  openPopup(popupImage);
+}
 
 popupList.forEach(popup => {
   popup.addEventListener('mouseup', handleMouseClose);
@@ -105,12 +114,23 @@ popupFormProfile.addEventListener('submit', saveProfile);
 popupFormPlace.addEventListener('submit', savePlace);
 placeAddButton.addEventListener('click', showPopupPlaceAdd);
 
-new FormValidator(popupFormProfile, formData).enableValidation();
-new FormValidator(popupFormPlace, formData).enableValidation();
+const formValidators = {};
 
-// для вызова FormValidator для всех форм
-//const formList = document.querySelectorAll('.popup__form');
-//formList.forEach(form => {
-// const inputList = form.querySelectorAll('.popup__input');
-// new FormValidator(form, formData).enableValidation();
-//});
+const enableValidation = config => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach(formElement => {
+    const validator = new FormValidator(formElement, config);
+    const formName = formElement.getAttribute('name');
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation({
+  formSelector: '.popup__form',
+  inputClass: '.popup__input',
+  submitButtonClass: '.popup__save-button',
+  notValidButtonClass: 'popup__save-button_not-valid',
+  popupInputErrorClass: 'popup__input_error-border',
+  inputErrorType: '.popup__input-error_type_'
+});
