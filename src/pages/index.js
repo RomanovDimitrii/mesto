@@ -1,26 +1,25 @@
-import { initialCards } from '../components/cards.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
-import { Popup } from '../components/Popup.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
 import './index.css';
-
-const page = document.querySelector('.page');
-const profileEditButton = page.querySelector('.profile__edit-button');
-const popupFormPlace = document.forms['form_place'];
-const nameInput = document.querySelector('.popup__input_type_name');
-const jobInput = document.querySelector('.popup__input_type_job');
-const placeInput = document.querySelector('.popup__input_type_place');
-const linkInput = document.querySelector('.popup__input_type_link');
-const photoGrid = document.querySelector('.photo-grid');
-const placeAddButton = document.querySelector('.profile__add-button');
+import {
+  initialCards,
+  profileEditButton,
+  nameInput,
+  jobInput,
+  placeInput,
+  linkInput,
+  photoElement,
+  placeAddButton,
+  config
+} from '../utils/constants.js';
 
 const handleFormProfileSubmit = data => {
   userInfo.setUserInfo(data);
-  popupProfile.closeWithoutReset();
+  popupProfile.close();
 };
 
 const handleFormPlaceSubmit = () => {
@@ -29,13 +28,14 @@ const handleFormPlaceSubmit = () => {
     link: linkInput.value,
     alt: placeInput.value
   };
-  popupPlace.close();
+  popupPlace.closeWithReset();
   const newCardElement = createCard(card);
   cardElement.addItem(newCardElement);
 };
 
 const popupProfile = new PopupWithForm('.popup_profile', handleFormProfileSubmit);
 const popupPlace = new PopupWithForm('.popup_place', handleFormPlaceSubmit);
+const popupImage = new PopupWithImage('.popup_image');
 
 const userInfo = new UserInfo({
   profileNameSelector: '.profile__title',
@@ -43,11 +43,15 @@ const userInfo = new UserInfo({
 });
 
 popupProfile.setEventListeners();
+popupPlace.setEventListeners();
+popupImage.setEventListeners();
 
 function showPopupProfile() {
   popupProfile.open();
-  nameInput.value = userInfo.getUserInfo().name;
-  jobInput.value = userInfo.getUserInfo().job;
+
+  const data = userInfo.getUserInfo();
+  nameInput.value = data.name;
+  jobInput.value = data.job;
   formValidators['form_profile'].resetValidation();
 }
 
@@ -64,7 +68,7 @@ const cardElement = new Section(
       cardElement.addItem(card);
     }
   },
-  photoGrid
+  photoElement
 );
 
 cardElement.renderer();
@@ -75,8 +79,7 @@ function createCard(items) {
 }
 
 function handleCardClick(name, link) {
-  const popupImage = new PopupWithImage(name, link, '.popup_image');
-  popupImage.openPopupImage();
+  popupImage.openPopupImage(name, link);
 }
 
 profileEditButton.addEventListener('click', showPopupProfile);
@@ -94,11 +97,4 @@ const enableValidation = config => {
   });
 };
 
-enableValidation({
-  formSelector: '.popup__form',
-  inputClass: '.popup__input',
-  submitButtonClass: '.popup__save-button',
-  notValidButtonClass: 'popup__save-button_not-valid',
-  popupInputErrorClass: 'popup__input_error-border',
-  inputErrorType: '.popup__input-error_type_'
-});
+enableValidation(config);

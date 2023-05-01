@@ -22,11 +22,8 @@ export class PopupWithForm extends Popup {
       this._handleFormSubmit(this._getInputValues());
     });
   }
-  close() {
+  closeWithReset() {
     super.close();
     this._formElement.reset();
-  }
-  closeWithoutReset() {
-    super.close();
   }
 }

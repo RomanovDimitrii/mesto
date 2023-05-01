@@ -2,7 +2,6 @@
   display: flex;
   margin: 20px 0 0 30px;
   flex-direction: column;
-  /* align-self: center; */
 }
 
 @media screen and (max-width: 750px) {
