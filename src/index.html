@@ -3,17 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./pages/index.css" />
 
     <title>mesto</title>
   </head>
   <body class="page">
     <header class="header">
-      <img class="header__logo" src="./images/Logo_header.svg" alt="Логотип карта России" />
+      <img
+        class="header__logo"
+        src="<%=require('./images/Logo_header.svg')%>"
+        alt="Логотип карта России"
+      />
     </header>
     <main class="main">
       <section class="profile">
-        <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар" />
+        <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар" />
         <div class="profile__info">
           <div class="profile__block">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -37,7 +40,7 @@
                 <button class="photo-grid__like-button" type="button">
                   <img
                     class="photo-grid__like-button-image"
-                    src="./images/like.svg"
+                    src="<%=require('./images/like.svg')%>"
                     alt="лайкнуть фото"
                   />
                 </button>
@@ -45,7 +48,7 @@
               <button class="photo-grid__delete-button" type="button">
                 <img
                   class="photo-grid__delete-button-image"
-                  src="./images/DeleteButton.svg"
+                  src="<%=require('./images/DeleteButton.svg')%>"
                   alt="удалить фото"
                 />
               </button>
@@ -63,7 +66,7 @@
         <button class="popup__close-button" type="button">
           <img
             class="popup__close-button-image"
-            src="./images/Close_button.svg"
+            src="<%=require('./images/Close_button.svg')%>"
             alt="закрыть окно редактированя профиля"
           />
         </button>
@@ -102,7 +105,7 @@
         <button class="popup__close-button" type="button">
           <img
             class="popup__close-button-image"
-            src="./images/Close_button.svg"
+            src="<%=require('./images/Close_button.svg')%>"
             alt="закрыть окно редактированя профиля"
           />
         </button>
@@ -141,18 +144,13 @@
         <button class="popup__close-button" type="button">
           <img
             class="popup__close-button-image"
-            src="./images/Close_button.svg"
-            alt="закрыть окно редактированя профиля"
+            src="<%=require('./images/Close_button.svg')%>"
+            alt="закрыть окно"
           />
         </button>
-        <img class="popup__image" src="./images/Close_button.svg" alt="" />
+        <img class="popup__image" src="<%=require('./images/Close_button.svg')%>" alt="" />
         <h2 class="popup__image-title"></h2>
       </div>
     </div>
-    <script type="module" src="./sсripts/cards.js"></script>
-    <script type="module" src="./sсripts/card.js"></script>
-    <!-- <script type="module" src="./sсripts/formData.js"></script> -->
-    <script type="module" src="./sсripts/formValidator.js"></script>
-    <script type="module" src="./sсripts/index.js"></script>
   </body>
 </html>
