@@ -1,38 +1,42 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+// const initialCards = [
+//   {
+//     name: 'Архыз',
+//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+//   },
+//   {
+//     name: 'Челябинская область',
+//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+//   },
+//   {
+//     name: 'Иваново',
+//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+//   },
+//   {
+//     name: 'Камчатка',
+//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+//   },
+//   {
+//     name: 'Холмогорский район',
+//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+//   },
+//   {
+//     name: 'Байкал',
+//     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+//   }
+// ];
 
+const url = 'https://mesto.nomoreparties.co/v1/cohort-65';
 const page = document.querySelector('.page');
 const profileEditButton = page.querySelector('.profile__edit-button');
 const nameInput = document.querySelector('.popup__input_type_name');
-const jobInput = document.querySelector('.popup__input_type_job');
+const jobInput = document.querySelector('.popup__input_type_about');
 const placeInput = document.querySelector('.popup__input_type_place');
 const linkInput = document.querySelector('.popup__input_type_link');
 const photoElement = document.querySelector('.photo-grid');
 const placeAddButton = document.querySelector('.profile__add-button');
+const avatarImage = document.querySelector('.profile__avatar');
+const avatarInput = document.querySelector('.popup__input_type_avatar');
+const popupSaveButton = document.querySelector('.popup__save-button');
 
 const config = {
   formSelector: '.popup__form',
@@ -44,7 +48,7 @@ const config = {
 };
 
 export {
-  initialCards,
+  url,
   page,
   profileEditButton,
   nameInput,
@@ -53,5 +57,8 @@ export {
   linkInput,
   photoElement,
   placeAddButton,
-  config
+  config,
+  avatarImage,
+  avatarInput,
+  popupSaveButton
 };

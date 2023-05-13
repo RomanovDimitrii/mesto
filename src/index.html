@@ -16,7 +16,15 @@
     </header>
     <main class="main">
       <section class="profile">
-        <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар" />
+        <div class="profile__avatar-container">
+          <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Аватар" />
+          <img
+            class="profile__avatar-edit"
+            src="<%=require('./images/Avatar_edit.png')%>"
+            alt="Редактировать аватар"
+          />
+        </div>
+
         <div class="profile__info">
           <div class="profile__block">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
@@ -37,13 +45,16 @@
               <img class="photo-grid__image" alt="" />
               <div class="photo-grid__inscription">
                 <h3 class="photo-grid__title"></h3>
-                <button class="photo-grid__like-button" type="button">
-                  <img
-                    class="photo-grid__like-button-image"
-                    src="<%=require('./images/like.svg')%>"
-                    alt="лайкнуть фото"
-                  />
-                </button>
+                <div class="photo-grid__block">
+                  <button class="photo-grid__like-button" type="button">
+                    <img
+                      class="photo-grid__like-button-image"
+                      src="<%=require('./images/like.svg')%>"
+                      alt="лайкнуть фото"
+                    />
+                  </button>
+                  <span class="photo-grid__like-button-counter"></span>
+                </div>
               </div>
               <button class="photo-grid__delete-button" type="button">
                 <img
@@ -85,21 +96,53 @@
           />
           <span class="popup__input-error popup__input-error_type_name"></span>
           <input
-            class="popup__input popup__input_type_job"
+            class="popup__input popup__input_type_about"
             type="text"
-            name="job"
-            id="job"
+            name="about"
+            id="about"
             placeholder="О себе"
             required
             minlength="2"
             maxlength="200"
           />
-          <span class="popup__input-error popup__input-error_type_job"></span>
+          <span class="popup__input-error popup__input-error_type_about"></span>
 
-          <button class="popup__save-button" type="submit" disabled>Сохранить</button>
+          <button class="popup__save-button popup__save-button_profile" type="submit" disabled>
+            Сохранить
+          </button>
         </form>
       </div>
     </div>
+
+    <div class="popup popup_avatar">
+      <div class="popup__container">
+        <button class="popup__close-button" type="button">
+          <img
+            class="popup__close-button-image"
+            src="<%=require('./images/Close_button.svg')%>"
+            alt="закрыть окно редактированя аватара"
+          />
+        </button>
+
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form popup__form_avatar" name="form_profile" novalidate>
+          <input
+            class="popup__input popup__input_type_avatar"
+            type="url"
+            name="avatar"
+            id="avatar"
+            placeholder="Ссылка на аватар"
+            required
+          />
+          <span class="popup__input-error popup__input-error_type_avatar"></span>
+
+          <button class="popup__save-button popup__save-button_avatar" type="submit" disabled>
+            Сохранить
+          </button>
+        </form>
+      </div>
+    </div>
+
     <div class="popup popup_place">
       <div class="popup__container">
         <button class="popup__close-button" type="button">
@@ -135,7 +178,9 @@
 
           <span class="popup__input-error popup__input-error_type_link"></span>
 
-          <button class="popup__save-button" type="submit" disabled>Сохранить</button>
+          <button class="popup__save-button popup__save-button_place" type="submit" disabled>
+            Сохранить
+          </button>
         </form>
       </div>
     </div>
@@ -150,6 +195,23 @@
         </button>
         <img class="popup__image" src="<%=require('./images/Close_button.svg')%>" alt="" />
         <h2 class="popup__image-title"></h2>
+      </div>
+    </div>
+
+    <div class="popup popup_delete-confirmation">
+      <div class="popup__container">
+        <button class="popup__close-button" type="submit">
+          <img
+            class="popup__close-button-image"
+            src="<%=require('./images/Close_button.svg')%>"
+            alt="закрыть окно редактированя профиля"
+          />
+        </button>
+
+        <h2 class="popup__title">Вы уверены?</h2>
+        <form class="popup__form-delete-confirmation">
+          <button class="popup__save-button popup__save-button_confirm" type="submit">Да</button>
+        </form>
       </div>
     </div>
   </body>
