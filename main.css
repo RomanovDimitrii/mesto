@@ -41,7 +41,7 @@
 .popup__save-button_confirm{margin:0;width:100%}
 .popup__title{color:#000;font-size:24px;font-weight:900;line-height:29px;margin:0 0 45px;text-align:left}@media screen and (max-width:400px){.popup__title{font-size:18px;line-height:22px;margin:0 0 62px}}
 .popup__input_error-border{border-bottom:1px solid red}
-.popup_opened{opacity:1;visibility:visible}
+.popup_opened{opacity:1;visibility:visible;z-index:6}
 .popup__image{max-height:75vh;max-width:75vw;-o-object-fit:cover;object-fit:cover;width:100%}
 .popup__image-title{color:#fff;font-size:12px;font-weight:400;line-height:14.5px;margin:10px 0 0}
 .popup__image-container{box-shadow:0 0 25px rgba(0,0,0,.15);box-sizing:border-box;max-height:75vh;max-width:75vw;position:relative}
