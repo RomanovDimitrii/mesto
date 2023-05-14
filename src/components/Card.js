@@ -35,10 +35,8 @@ export class Card {
 
   setLikes(newLikes) {
     this._likes = newLikes;
-    const likeCountElement = this._element.querySelector('.photo-grid__like-button-counter');
-    likeCountElement.textContent = this._likes.length;
+    this._likeCountElement.textContent = this._likes.length;
 
-    //   const ifUserLikedCard = this._likes.find(user => user._id === this._userId);
     if (this.isLiked()) {
       this._handleCardLike();
     } else {
@@ -81,6 +79,7 @@ export class Card {
     this._element.querySelector('.photo-grid__title').textContent = this._name;
     this._likeButton = this._element.querySelector('.photo-grid__like-button');
     this._deleteButton = this._element.querySelector('.photo-grid__delete-button');
+    this._likeCountElement = this._element.querySelector('.photo-grid__like-button-counter');
 
     if (this._ownerId !== this._userId) {
       this._deleteButton.style.display = 'none';

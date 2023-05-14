@@ -30,13 +30,11 @@ const page = document.querySelector('.page');
 const profileEditButton = page.querySelector('.profile__edit-button');
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_about');
-const placeInput = document.querySelector('.popup__input_type_place');
-const linkInput = document.querySelector('.popup__input_type_link');
 const photoElement = document.querySelector('.photo-grid');
 const placeAddButton = document.querySelector('.profile__add-button');
 const avatarImage = document.querySelector('.profile__avatar');
+
 const avatarInput = document.querySelector('.popup__input_type_avatar');
-const popupSaveButton = document.querySelector('.popup__save-button');
 
 const config = {
   formSelector: '.popup__form',
@@ -53,12 +51,9 @@ export {
   profileEditButton,
   nameInput,
   jobInput,
-  placeInput,
-  linkInput,
   photoElement,
   placeAddButton,
   config,
   avatarImage,
-  avatarInput,
-  popupSaveButton
+  avatarInput
 };

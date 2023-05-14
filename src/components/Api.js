@@ -4,111 +4,107 @@ export class API {
     this._headers = headers;
   }
 
-  async getInitialCards() {
-    const initialCards = await fetch(`${this._url}/cards`, {
+  getInitialCards() {
+    return fetch(`${this._url}/cards`, {
       headers: this._headers
-    });
-
-    if (!initialCards.ok) {
-      return Promise.reject(`Ошибка: ${response.status}`);
-    }
-    return initialCards.json();
+    })
+      .then(this._checkResponse)
+      .catch(err => {
+        renderError(`Ошибка: ${err}`);
+      });
   }
 
-  async getProfile() {
-    const profileData = await fetch(`${this._url}/users/me`, {
+  getProfile() {
+    return fetch(`${this._url}/users/me`, {
       headers: this._headers
-    });
-
-    if (!profileData.ok) {
-      console.log('ошибка getProfile');
-      return Promise.reject(`Ошибка: ${profileData.status}`);
-    }
-    return profileData.json();
+    })
+      .then(this._checkResponse)
+      .catch(err => {
+        renderError(`Ошибка: ${err}`);
+      });
   }
 
-  async editProfile({ data }) {
-    const response = await fetch(`${this._url}/users/me`, {
+  editProfile({ data }) {
+    return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         about: data.about
       })
-    });
-    if (!response.ok) {
-      return Promise.reject(`Ошибка: ${response.status}`);
-    }
-    return response.json();
+    })
+      .then(this._checkResponse)
+      .catch(err => {
+        renderError(`Ошибка: ${err}`);
+      });
   }
 
-  async editProfileAvatar(data) {
-    const response = await fetch(`${this._url}/users/me/avatar`, {
+  editProfileAvatar(data) {
+    return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         avatar: data
       })
-    });
-    if (!response.ok) {
-      return Promise.reject(`Ошибка: ${response.status}`);
-    }
-    return response.json();
+    })
+      .then(this._checkResponse)
+      .catch(err => {
+        renderError(`Ошибка: ${err}`);
+      });
   }
 
-  async postCard({ card }) {
-    const response = await fetch(`${this._url}/cards`, {
+  postCard({ card }) {
+    return fetch(`${this._url}/cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
         name: card.name,
         link: card.link
       })
-    });
-    if (!response.ok) {
-      console.log('запрос не прошел');
-      return Promise.reject(`Ошибка: ${response.status}`);
-    }
-    console.log('запрос прошел');
-    return response.json();
+    })
+      .then(this._checkResponse)
+      .catch(err => {
+        renderError(`Ошибка: ${err}`);
+      });
   }
 
-  async deleteCard(id) {
-    const response = await fetch(`${this._url}/cards/${id}`, {
+  deleteCard(id) {
+    return fetch(`${this._url}/cards/${id}`, {
       method: 'DELETE',
       headers: this._headers
-    });
-    if (!response.ok) {
-      console.log('запрос на удаление карточки не прошел');
-      return Promise.reject(`Ошибка: ${response.status}`);
-    }
-    console.log('запрос на удаление карточки прошел');
-    return response.json();
+    })
+      .then(this._checkResponse)
+      .catch(err => {
+        renderError(`Ошибка: ${err}`);
+      });
   }
 
-  async deleteLike(id) {
-    const response = await fetch(`${this._url}/cards/${id}/likes`, {
+  deleteLike(id) {
+    return fetch(`${this._url}/cards/${id}/likes`, {
       method: 'DELETE',
       headers: this._headers
-    });
-    if (!response.ok) {
-      console.log('запрос на удаление лайка не прошел');
-      return Promise.reject(`Ошибка: ${response.status}`);
-    }
-    console.log('запрос на удаление лайка прошел');
-    return response.json();
+    })
+      .then(this._checkResponse)
+      .catch(err => {
+        renderError(`Ошибка: ${err}`);
+      });
   }
 
-  async addLike(id) {
-    const response = await fetch(`${this._url}/cards/${id}/likes`, {
+  addLike(id) {
+    return fetch(`${this._url}/cards/${id}/likes`, {
       method: 'PUT',
       headers: this._headers
-    });
+    })
+      .then(this._checkResponse)
+      .catch(err => {
+        renderError(`Ошибка: ${err}`);
+      });
+  }
+
+  _checkResponse(response) {
     if (!response.ok) {
-      console.log('запрос на добавление лайка не прошел');
       return Promise.reject(`Ошибка: ${response.status}`);
     }
-    console.log('запрос на добавление лайка прошел');
     return response.json();
   }
 }

@@ -12,64 +12,48 @@ import {
   profileEditButton,
   nameInput,
   jobInput,
-  placeInput,
-  linkInput,
   photoElement,
   placeAddButton,
   config,
   avatarImage,
-  avatarInput,
-  popupSaveButton
+  avatarInput
 } from '../utils/constants.js';
 
 async function handleFormProfileSubmit(data) {
   try {
-    document.querySelector('.popup__save-button_profile').textContent = 'Сохранение...';
-    userInfo.setUserInfo(data);
-    await api.editProfile({ data });
-
-    popupProfile.close();
-    document.querySelector('.popup__save-button_profile').textContent = 'Сохранить';
+    const res = await api.editProfile({ data });
+    userInfo.setUserInfo(res);
   } catch (error) {
     console.error(`Ошибка при обновлении данных профайла: ${error}`);
   }
 }
 
-async function handleFormAvatarSubmit() {
+async function handleFormAvatarSubmit(data) {
   try {
-    document.querySelector('.popup__save-button_avatar').textContent = 'Сохранение...';
-    console.log(popupSaveButton);
-    const data = await api.getProfile();
-
-    data.avatar = avatarInput.value;
-    userInfo.setUserInfo(data);
-    await api.editProfileAvatar(data.avatar);
-
-    popupAvatar.close();
-    document.querySelector('.popup__save-button_avatar').textContent = 'Сохранить';
+    // console.log(data);
+    const res = await api.editProfileAvatar(data.avatar);
+    //  console.log(res);
+    userInfo.setUserInfo(res);
   } catch (error) {
     console.error(`Ошибка при обновлении данных профайла: ${error}`);
   }
 }
 
-async function handleFormPlaceSubmit() {
+async function handleFormPlaceSubmit(data) {
   try {
-    document.querySelector('.popup__save-button_place').textContent = 'Сохранение...';
     const card = {
-      name: placeInput.value,
-      link: linkInput.value,
-      alt: placeInput.value
+      name: data.place,
+      link: data.link,
+      alt: data.place
     };
 
     const newCard = await api.postCard({ card });
     section.addItem(createCard(newCard));
-    popupPlace.closeWithReset();
-    document.querySelector('.popup__save-button_place').textContent = 'Сохранить';
   } catch (error) {
     console.error(`Ошибка при добавлении карточки: ${error}`);
   }
 }
-//data.owner._id
+
 const popupProfile = new PopupWithForm('.popup_profile', handleFormProfileSubmit);
 const popupPlace = new PopupWithForm('.popup_place', handleFormPlaceSubmit);
 const popupImage = new PopupWithImage('.popup_image');
@@ -97,61 +81,40 @@ popupPlace.setEventListeners();
 popupImage.setEventListeners();
 popupAvatar.setEventListeners();
 
-async function showPopupProfile() {
-  try {
-    popupProfile.open();
-    const data = await api.getProfile();
-    nameInput.value = data.name;
-    jobInput.value = data.about;
-
-    setUserData(data);
-    formValidators['form_profile'].resetValidation();
-  } catch (error) {
-    console.error(`Ошибка при получении данных профайла: ${error}`);
-  }
-}
-
-async function showPopupAvatar() {
-  try {
-    popupAvatar.open();
-    const data = await api.getProfile();
-    avatarInput.value = data.avatar;
-    //    setUserData(data);
-
-    formValidators['form_profile'].resetValidation();
-  } catch (error) {
-    console.error(`Ошибка при получении данных профайла: ${error}`);
-  }
-}
-
 let userId;
-async function setUserData() {
-  const data = await api.getProfile();
-  userId = data._id;
-  userInfo.setUserInfo(data);
-}
-setUserData();
+Promise.all([api.getProfile(), api.getInitialCards()])
+  .then(([userData, cards]) => {
+    userId = userData._id;
+    userInfo.setUserInfo(userData);
+    cards.reverse().forEach(item => {
+      section.addItem(createCard(item));
+    });
+  })
+  .catch(error => {
+    console.error(`Ошибка при получении данных профайла и карточек: ${error}`);
+  });
 
-const section = new Section(item, photoElement);
+function showPopupProfile() {
+  popupProfile.open();
+  const data = userInfo.getUserInfo();
+  nameInput.value = data.name;
+  jobInput.value = data.about;
+  formValidators['form_profile'].resetValidation();
+}
+
+function showPopupAvatar() {
+  popupAvatar.open();
+  const data = userInfo.getUserInfo();
+  avatarInput.value = data.avatar;
+  formValidators['form_profile'].resetValidation();
+}
 
 function showPopupPlaceAdd() {
   popupPlace.open();
   formValidators['form_place'].resetValidation();
 }
 
-async function addCards() {
-  try {
-    const data = await api.getInitialCards();
-
-    data.forEach(item => {
-      section.addItem(createCard(item));
-    });
-  } catch (error) {
-    console.error(`Ошибка при добавлении карточки: ${error}`);
-  }
-}
-
-addCards();
+const section = new Section(item, photoElement);
 
 function createCard(item) {
   const card = new Card(
@@ -169,13 +132,23 @@ function createCard(item) {
     userId,
     id => {
       if (card.isLiked()) {
-        api.deleteLike(id).then(res => {
-          card.setLikes(res.likes);
-        });
+        api
+          .deleteLike(id)
+          .then(res => {
+            card.setLikes(res.likes);
+          })
+          .catch(err => {
+            renderError(`Ошибка: ${err}`);
+          });
       } else {
-        api.addLike(id).then(res => {
-          card.setLikes(res.likes);
-        });
+        api
+          .addLike(id)
+          .then(res => {
+            card.setLikes(res.likes);
+          })
+          .catch(err => {
+            renderError(`Ошибка: ${err}`);
+          });
       }
     }
   );
