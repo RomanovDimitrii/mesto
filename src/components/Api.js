@@ -7,21 +7,13 @@ export class API {
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       headers: this._headers
-    })
-      .then(this._checkResponse)
-      .catch(err => {
-        renderError(`Ошибка: ${err}`);
-      });
+    }).then(this._checkResponse);
   }
 
   getProfile() {
     return fetch(`${this._url}/users/me`, {
       headers: this._headers
-    })
-      .then(this._checkResponse)
-      .catch(err => {
-        renderError(`Ошибка: ${err}`);
-      });
+    }).then(this._checkResponse);
   }
 
   editProfile({ data }) {
@@ -32,11 +24,7 @@ export class API {
         name: data.name,
         about: data.about
       })
-    })
-      .then(this._checkResponse)
-      .catch(err => {
-        renderError(`Ошибка: ${err}`);
-      });
+    }).then(this._checkResponse);
   }
 
   editProfileAvatar(data) {
@@ -46,11 +34,7 @@ export class API {
       body: JSON.stringify({
         avatar: data
       })
-    })
-      .then(this._checkResponse)
-      .catch(err => {
-        renderError(`Ошибка: ${err}`);
-      });
+    }).then(this._checkResponse);
   }
 
   postCard({ card }) {
@@ -61,44 +45,28 @@ export class API {
         name: card.name,
         link: card.link
       })
-    })
-      .then(this._checkResponse)
-      .catch(err => {
-        renderError(`Ошибка: ${err}`);
-      });
+    }).then(this._checkResponse);
   }
 
   deleteCard(id) {
     return fetch(`${this._url}/cards/${id}`, {
       method: 'DELETE',
       headers: this._headers
-    })
-      .then(this._checkResponse)
-      .catch(err => {
-        renderError(`Ошибка: ${err}`);
-      });
+    }).then(this._checkResponse);
   }
 
   deleteLike(id) {
     return fetch(`${this._url}/cards/${id}/likes`, {
       method: 'DELETE',
       headers: this._headers
-    })
-      .then(this._checkResponse)
-      .catch(err => {
-        renderError(`Ошибка: ${err}`);
-      });
+    }).then(this._checkResponse);
   }
 
   addLike(id) {
     return fetch(`${this._url}/cards/${id}/likes`, {
       method: 'PUT',
       headers: this._headers
-    })
-      .then(this._checkResponse)
-      .catch(err => {
-        renderError(`Ошибка: ${err}`);
-      });
+    }).then(this._checkResponse);
   }
 
   _checkResponse(response) {

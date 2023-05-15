@@ -30,9 +30,7 @@ async function handleFormProfileSubmit(data) {
 
 async function handleFormAvatarSubmit(data) {
   try {
-    // console.log(data);
     const res = await api.editProfileAvatar(data.avatar);
-    //  console.log(res);
     userInfo.setUserInfo(res);
   } catch (error) {
     console.error(`Ошибка при обновлении данных профайла: ${error}`);
@@ -124,9 +122,15 @@ function createCard(item) {
     id => {
       popupDeleteConfirmation.open();
       popupDeleteConfirmation.handleDeleteCardId(() => {
-        deleteCard(id);
-        popupDeleteConfirmation.close();
-        card.deleteCard();
+        api
+          .deleteCard(id)
+          .then(() => {
+            popupDeleteConfirmation.close();
+            card.deleteCard();
+          })
+          .catch(err => {
+            renderError(`Ошибка: ${err}`);
+          });
       });
     },
     userId,
@@ -157,14 +161,6 @@ function createCard(item) {
 
 function handleCardClick(name, link) {
   popupImage.openPopupImage(name, link);
-}
-
-async function deleteCard(id) {
-  try {
-    await api.deleteCard(id);
-  } catch (error) {
-    console.error(`Ошибка при удалении карточки: ${error}`);
-  }
 }
 
 popupDeleteConfirmation.setEventListeners();
